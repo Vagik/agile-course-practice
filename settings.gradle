@@ -41,3 +41,7 @@ include "code/korniakov-kirill-lab3/View"
 project(":code/korniakov-kirill-lab3/View").name = "korniakov-kirill-lab3-View"
 include "code/korniakov-kirill-lab3/Infrastructure"
 project(":code/korniakov-kirill-lab3/Infrastructure").name = "korniakov-kirill-lab3-Infrastructure"
+
+// Simonyan Vaginak, lab1
+include "code/students-performance"
+project(":code/students-performance").name = "students-performance-Model"
