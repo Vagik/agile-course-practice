@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 
 public class StudentsTest {
 
-    private static final double compareDelta = 0.001;
+    private static final double COMPARE_DELTA = 0.001;
 
     @Test
     public void canCreateStudentWithoutParameters() {
@@ -40,13 +40,13 @@ public class StudentsTest {
     public void canGetMarksNumber() {
         ArrayList<Integer> marks = new ArrayList<>(List.of(5, 3, 4, 2, 5));
         Student student = new Student(marks);
-        assertEquals(5, student.getMarksNumber(), compareDelta);
+        assertEquals(5, student.getMarksNumber(), COMPARE_DELTA);
     }
 
     @Test
     public void canGetMarksNumberIfNoMarks() {
         Student student = new Student();
-        assertEquals(0, student.getMarksNumber(), compareDelta);
+        assertEquals(0, student.getMarksNumber(), COMPARE_DELTA);
     }
 
     @Test
@@ -147,12 +147,12 @@ public class StudentsTest {
     public void canGetStudentAverageRating() {
         ArrayList<Integer> marks = new ArrayList<>(List.of(5, 3, 4, 2, 5));
         Student student = new Student(marks);
-        assertEquals(3.8, student.getAverageRating(), compareDelta);
+        assertEquals(3.8, student.getAverageRating(), COMPARE_DELTA);
     }
 
     @Test
     public void canGetStudentAverageRatingIfNoMarks() {
         Student student = new Student();
-        assertEquals(0.0, student.getAverageRating(), compareDelta);
+        assertEquals(0.0, student.getAverageRating(), COMPARE_DELTA);
     }
 }

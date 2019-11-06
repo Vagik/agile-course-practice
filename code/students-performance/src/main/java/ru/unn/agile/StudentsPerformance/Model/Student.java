@@ -1,14 +1,13 @@
 package ru.unn.agile.StudentsPerformance.Model;
 
-import javax.crypto.IllegalBlockSizeException;
 import java.util.*;
 
 public class Student {
 
-    private final static Integer excellentMark = 5;
-    private final static Integer goodMark = 4;
-    private final static Integer satisfactoryMark = 3;
-    private final static Integer badMark = 2;
+    private static final Integer EXCELLENT_MARK = 5;
+    private static final Integer GOOD_MARK = 4;
+    private static final Integer SATISFACTORY_MARK = 3;
+    private static final Integer BAD_MARK = 2;
 
     private List<Integer> listOfMarks;
 
@@ -16,11 +15,11 @@ public class Student {
         listOfMarks = new ArrayList<>();
     }
 
-    public Student(List<Integer> listOfMarks) {
+    public Student(final List<Integer> listOfMarks) {
         if (listOfMarks == null) {
             throw new IllegalArgumentException("The list of student marks can't be null");
         }
-        if (listOfMarks.stream().anyMatch(mark -> mark < badMark || mark > excellentMark)) {
+        if (listOfMarks.stream().anyMatch(mark -> mark < BAD_MARK || mark > EXCELLENT_MARK)) {
             throw new IllegalArgumentException("Marks must be in the range of 2 to 5");
         }
         this.listOfMarks = listOfMarks;
@@ -31,25 +30,25 @@ public class Student {
     }
 
     public boolean checkIsExcellent() {
-        return !listOfMarks.isEmpty() &&
-                listOfMarks.stream().allMatch(mark -> mark.equals(excellentMark));
+        return !listOfMarks.isEmpty()
+                && listOfMarks.stream().allMatch(mark -> mark.equals(EXCELLENT_MARK));
     }
 
     public boolean checkIsGood() {
-        return !listOfMarks.isEmpty() &&
-                listOfMarks.stream().allMatch(mark -> mark >= goodMark) &&
-                listOfMarks.stream().anyMatch(mark -> mark.equals(goodMark));
+        return !listOfMarks.isEmpty()
+                && listOfMarks.stream().allMatch(mark -> mark >= GOOD_MARK)
+                && listOfMarks.stream().anyMatch(mark -> mark.equals(GOOD_MARK));
     }
 
     public boolean checkIsSatisfactory() {
-        return !listOfMarks.isEmpty() &&
-                listOfMarks.stream().allMatch(mark -> mark >= satisfactoryMark) &&
-                listOfMarks.stream().anyMatch(mark -> mark.equals(satisfactoryMark));
+        return !listOfMarks.isEmpty()
+                && listOfMarks.stream().allMatch(mark -> mark >= SATISFACTORY_MARK)
+                && listOfMarks.stream().anyMatch(mark -> mark.equals(SATISFACTORY_MARK));
     }
 
     public boolean checkIsBad() {
-        return !listOfMarks.isEmpty() &&
-                listOfMarks.stream().anyMatch(mark -> mark.equals(badMark));
+        return !listOfMarks.isEmpty()
+                && listOfMarks.stream().anyMatch(mark -> mark.equals(BAD_MARK));
     }
 
     public Double getAverageRating() {
