@@ -1,5 +1,6 @@
 package ru.unn.agile.StudentsPerformance.Model;
 
+import javax.crypto.IllegalBlockSizeException;
 import java.util.*;
 
 public class Student {
@@ -25,34 +26,38 @@ public class Student {
         this.listOfMarks = listOfMarks;
     }
 
-    public Integer getMarksCount() {
+    public Integer getMarksNumber() {
         return listOfMarks.size();
     }
 
     public boolean checkIsExcellent() {
-        return listOfMarks.stream().allMatch(mark -> mark.equals(excellentMark));
+        return !listOfMarks.isEmpty() &&
+                listOfMarks.stream().allMatch(mark -> mark.equals(excellentMark));
     }
 
     public boolean checkIsGood() {
-        return listOfMarks.stream().allMatch(mark -> mark >= goodMark) &&
+        return !listOfMarks.isEmpty() &&
+                listOfMarks.stream().allMatch(mark -> mark >= goodMark) &&
                 listOfMarks.stream().anyMatch(mark -> mark.equals(goodMark));
     }
 
     public boolean checkIsSatisfactory() {
-        return listOfMarks.stream().allMatch(mark -> mark >= satisfactoryMark) &&
+        return !listOfMarks.isEmpty() &&
+                listOfMarks.stream().allMatch(mark -> mark >= satisfactoryMark) &&
                 listOfMarks.stream().anyMatch(mark -> mark.equals(satisfactoryMark));
     }
 
     public boolean checkIsBad() {
-        return listOfMarks.stream().anyMatch(mark -> mark.equals(badMark));
+        return !listOfMarks.isEmpty() &&
+                listOfMarks.stream().anyMatch(mark -> mark.equals(badMark));
     }
 
     public Double getAverageRating() {
-        double marksCount = listOfMarks.size();
-        if (marksCount == 0) {
+        if (listOfMarks.isEmpty()) {
             return 0.0;
         }
 
+        double marksCount = listOfMarks.size();
         double marksSum = listOfMarks.stream().mapToInt(Integer::intValue).sum();
         return marksSum / marksCount;
     }

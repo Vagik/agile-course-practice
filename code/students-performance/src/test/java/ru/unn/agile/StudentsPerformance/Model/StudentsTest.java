@@ -37,11 +37,16 @@ public class StudentsTest {
     }
 
     @Test
-    public void canGetMarksCount() {
+    public void canGetMarksNumber() {
         ArrayList<Integer> marks = new ArrayList<>(List.of(5, 3, 4, 2, 5));
         Student student = new Student(marks);
-        Integer marksCount = student.getMarksCount();
-        assertEquals(5, marksCount, compareDelta);
+        assertEquals(5, student.getMarksNumber(), compareDelta);
+    }
+
+    @Test
+    public void canGetMarksNumberIfNoMarks() {
+        Student student = new Student();
+        assertEquals(0, student.getMarksNumber(), compareDelta);
     }
 
     @Test
@@ -56,6 +61,12 @@ public class StudentsTest {
         ArrayList<Integer> marks = new ArrayList<>(List.of(5, 5, 5, 5, 5));
         Student student = new Student(marks);
         assertTrue(student.checkIsExcellent());
+    }
+
+    @Test
+    public void canCheckIsExcellentStudentIfIsEmpty() {
+        Student student = new Student();
+        assertFalse(student.checkIsExcellent());
     }
 
     @Test
@@ -76,6 +87,12 @@ public class StudentsTest {
     public void canCheckIsGoodStudentIfIsBetter() {
         ArrayList<Integer> marks = new ArrayList<>(List.of(5, 5, 5, 5, 5));
         Student student = new Student(marks);
+        assertFalse(student.checkIsGood());
+    }
+
+    @Test
+    public void canCheckIsGoodStudentIfIsEmpty() {
+        Student student = new Student();
         assertFalse(student.checkIsGood());
     }
 
@@ -101,6 +118,12 @@ public class StudentsTest {
     }
 
     @Test
+    public void canCheckIsSatisfactoryStudentIfIsEmpty() {
+        Student student = new Student();
+        assertFalse(student.checkIsSatisfactory());
+    }
+
+    @Test
     public void canCheckIsBadStudentIfIsBad() {
         ArrayList<Integer> marks = new ArrayList<>(List.of(5, 3, 4, 2, 5));
         Student student = new Student(marks);
@@ -111,6 +134,12 @@ public class StudentsTest {
     public void canCheckIsBadStudentIfIsBetter() {
         ArrayList<Integer> marks = new ArrayList<>(List.of(5, 3, 4, 3, 5));
         Student student = new Student(marks);
+        assertFalse(student.checkIsBad());
+    }
+
+    @Test
+    public void canCheckIsBadStudentIfIsEmpty() {
+        Student student = new Student();
         assertFalse(student.checkIsBad());
     }
 
