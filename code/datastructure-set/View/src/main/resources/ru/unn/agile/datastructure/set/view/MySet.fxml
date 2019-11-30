@@ -2,5 +2,25 @@
 
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.unn.agile.datastructure.set.view.MySet">
+<?import javafx.scene.control.Label?>
+<?import ru.unn.agile.datastructure.set.model.MySet?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" prefHeight="300.0" prefWidth="600.0" fx:controller="ru.unn.agile.datastructure.set.view.MySet">
+    <children>
+        <Button layoutX="33.0" layoutY="163.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="104.0" text="Add" />
+        <TextField layoutX="33.0" layoutY="66.0" />
+        <Label layoutX="350.0" layoutY="45.0" text="Current collection" />
+        <TextField editable="false" layoutX="350.0" layoutY="63.0" />
+        <Label layoutX="33.0" layoutY="45.0" text="Items" />
+        <Button layoutX="178.0" layoutY="163.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="104.0" text="Remove" />
+        <Button layoutX="320.0" layoutY="163.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="104.0" text="Retain" />
+        <Button layoutX="468.0" layoutY="163.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="104.0" text="Clear" />
+        <Button layoutX="33.0" layoutY="207.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="104.0" text="Contains" />
+        <Label layoutX="34.0" layoutY="235.0" text="Contains:" />
+        <Label layoutX="88.0" layoutY="235.0" text="No" />
+        <Button layoutX="178.0" layoutY="207.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="104.0" text="Is Empty" />
+        <Label layoutX="178.0" layoutY="235.0" text="Is Empty:" />
+        <Label layoutX="232.0" layoutY="235.0" text="No" />
+    </children>
 </AnchorPane>
