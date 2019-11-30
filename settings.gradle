@@ -127,9 +127,13 @@ project(":code/priority-queue").name = "priority-queue"
 // Тамилина Дарья
 // Тягунов Владимир
 // Федорова Дарья
-// Федотов Андрей
-include "code/datastructure-set"
-project(":code/datastructure-set").name = "datastructure-set"
+// datastructure-set
+include "code/datastructure-set/Model"
+project(":code/datastructure-set/Model").name = "datastructure-set-Model"
+include "code/datastructure-set/View"
+project(":code/datastructure-set/View").name = "datastructure-set-View"
+include "code/datastructure-set/ViewModel"
+project(":code/datastructure-set/ViewModel").name = "datastructure-set-ViewModel"
 // Широких Виолетта
 // Шульпин Степан
 include "code/mortgage-calculator"
