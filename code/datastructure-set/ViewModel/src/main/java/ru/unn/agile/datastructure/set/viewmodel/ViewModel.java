@@ -11,10 +11,10 @@ import java.util.Set;
 
 public class ViewModel {
 
-    private BooleanProperty btnAddEnabledProp = new SimpleBooleanProperty();
-    private BooleanProperty btnRemoveEnabledProp = new SimpleBooleanProperty();
-    private BooleanProperty btnRetainEnabledProp = new SimpleBooleanProperty();
-    private BooleanProperty btnContainsEnabledProp = new SimpleBooleanProperty();
+    private BooleanProperty btnAddDisabledProp = new SimpleBooleanProperty();
+    private BooleanProperty btnRemoveDisabledProp = new SimpleBooleanProperty();
+    private BooleanProperty btnRetainDisabledProp = new SimpleBooleanProperty();
+    private BooleanProperty btnContainsDisabledProp = new SimpleBooleanProperty();
     private StringProperty txtContainsItemProp = new SimpleStringProperty();
     private StringProperty txtIsEmptySetProp = new SimpleStringProperty();
     private StringProperty txtEnteredItemsProp = new SimpleStringProperty();
@@ -23,10 +23,10 @@ public class ViewModel {
     private Set<Integer> enteredSet = new LinkedHashSet<>();
 
     public ViewModel() {
-        btnAddEnabledProp.setValue(false);
-        btnRemoveEnabledProp.setValue(false);
-        btnRetainEnabledProp.setValue(false);
-        btnContainsEnabledProp.setValue(false);
+        btnAddDisabledProp.setValue(true);
+        btnRemoveDisabledProp.setValue(true);
+        btnRetainDisabledProp.setValue(true);
+        btnContainsDisabledProp.setValue(true);
 
         txtContainsItemProp.setValue("");
         txtIsEmptySetProp.setValue("");
@@ -38,20 +38,20 @@ public class ViewModel {
         });
     }
 
-    public boolean isAddButtonEnable() {
-        return btnAddEnabledProp.get();
+    public BooleanProperty isAddButtonDisabled() {
+        return btnAddDisabledProp;
     }
 
-    public boolean isRemoveButtonEnable() {
-        return btnRemoveEnabledProp.get();
+    public BooleanProperty isRemoveButtonDisabled() {
+        return btnRemoveDisabledProp;
     }
 
-    public boolean isContainsButtonEnable() {
-        return btnContainsEnabledProp.get();
+    public BooleanProperty isContainsButtonDisabled() {
+        return btnContainsDisabledProp;
     }
 
-    public boolean isRetainButtonEnable() {
-        return btnRetainEnabledProp.get();
+    public BooleanProperty isRetainButtonDisabled() {
+        return btnRetainDisabledProp;
     }
 
     public StringProperty getTxtEnteredItemsProp() {
@@ -68,47 +68,6 @@ public class ViewModel {
 
     public StringProperty getTxtIsEmptyItemProp() {
         return txtIsEmptySetProp;
-    }
-
-    private void setEnteredItems(String itemsStr) {
-        enteredSet.clear();
-        txtEnteredItemsProp.setValue(itemsStr);
-
-        var isValidEnteredData = false;
-
-        if (!itemsStr.isEmpty()) {
-            var splitedItems = itemsStr.split(" ");
-            if (splitedItems.length > 0) {
-                for (String splitedItem : splitedItems) {
-                    try {
-                        int parsedItem = Integer.parseInt(splitedItem);
-                        enteredSet.add(parsedItem);
-                    } catch (NumberFormatException e) {
-                        break;
-                    }
-                }
-                isValidEnteredData = splitedItems.length == enteredSet.size();
-            }
-        }
-
-        btnAddEnabledProp.setValue(isValidEnteredData);
-        btnRemoveEnabledProp.setValue(isValidEnteredData);
-        btnRetainEnabledProp.setValue(isValidEnteredData);
-        btnContainsEnabledProp.setValue(isValidEnteredData);
-    }
-
-    private String getCurrentSetItems() {
-        if (currentSet.isEmpty()) {
-            return "";
-        }
-        var builder = new StringBuilder();
-        var iterator = currentSet.iterator();
-        while (iterator.hasNext()) {
-            builder.append(iterator.next());
-            builder.append(" ");
-        }
-        builder.deleteCharAt(builder.length() - 1);
-        return builder.toString();
     }
 
     public void addEnteredItems() {
@@ -134,8 +93,7 @@ public class ViewModel {
     public void containsEnteredItems() {
         if (currentSet.containsAll(enteredSet)) {
             txtContainsItemProp.setValue("Yes");
-        }
-        else {
+        } else {
             txtContainsItemProp.setValue("No");
         }
     }
@@ -143,9 +101,49 @@ public class ViewModel {
     public void isCurrentSetEmpty() {
         if (currentSet.isEmpty()) {
             txtIsEmptySetProp.setValue("Yes");
-        }
-        else {
+        } else {
             txtIsEmptySetProp.setValue("No");
         }
+    }
+
+    private void setEnteredItems(final String itemsStr) {
+        enteredSet.clear();
+        txtEnteredItemsProp.setValue(itemsStr);
+
+        var isValidEnteredData = false;
+
+        if (!itemsStr.isEmpty()) {
+            var splitedItems = itemsStr.split(" ");
+            if (splitedItems.length > 0) {
+                for (String splitedItem : splitedItems) {
+                    try {
+                        int parsedItem = Integer.parseInt(splitedItem);
+                        enteredSet.add(parsedItem);
+                    } catch (NumberFormatException e) {
+                        break;
+                    }
+                }
+                isValidEnteredData = splitedItems.length == enteredSet.size();
+            }
+        }
+
+        btnAddDisabledProp.setValue(!isValidEnteredData);
+        btnRemoveDisabledProp.setValue(!isValidEnteredData);
+        btnRetainDisabledProp.setValue(!isValidEnteredData);
+        btnContainsDisabledProp.setValue(!isValidEnteredData);
+    }
+
+    private String getCurrentSetItems() {
+        if (currentSet.isEmpty()) {
+            return "";
+        }
+        var builder = new StringBuilder();
+        var iterator = currentSet.iterator();
+        while (iterator.hasNext()) {
+            builder.append(iterator.next());
+            builder.append(" ");
+        }
+        builder.deleteCharAt(builder.length() - 1);
+        return builder.toString();
     }
 }

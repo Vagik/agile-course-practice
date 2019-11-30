@@ -21,46 +21,46 @@ public class ViewModelTests {
 
     @Test
     public void ifNoEnteredItemsAddButtonIsDisabled() {
-        assertFalse(viewModel.isAddButtonEnable());
+        assertTrue(viewModel.isAddButtonDisabled().get());
     }
 
     @Test
     public void ifNoEnteredItemsRemoveButtonIsDisabled() {
-        assertFalse(viewModel.isRemoveButtonEnable());
+        assertTrue(viewModel.isRemoveButtonDisabled().get());
     }
 
     @Test
     public void ifNoEnteredItemsContainsButtonIsDisabled() {
-        assertFalse(viewModel.isContainsButtonEnable());
+        assertTrue(viewModel.isContainsButtonDisabled().get());
     }
 
     @Test
     public void ifNoEnteredItemsRetainButtonIsDisabled() {
-        assertFalse(viewModel.isRetainButtonEnable());
+        assertTrue(viewModel.isRetainButtonDisabled().get());
     }
 
     @Test
     public void ifEnteredItemIsValidAddButtonIsEnabled() {
         viewModel.getTxtEnteredItemsProp().setValue("10");
-        assertTrue(viewModel.isAddButtonEnable());
+        assertFalse(viewModel.isAddButtonDisabled().get());
     }
 
     @Test
     public void ifEnteredItemIsNotValidAddButtonIsDisabled() {
         viewModel.getTxtEnteredItemsProp().setValue("ds");
-        assertFalse(viewModel.isAddButtonEnable());
+        assertTrue(viewModel.isAddButtonDisabled().get());
     }
 
     @Test
     public void ifEnteredItemsAreValidAddButtonIsEnabled() {
         viewModel.getTxtEnteredItemsProp().setValue("10 52 -3 95");
-        assertTrue(viewModel.isAddButtonEnable());
+        assertFalse(viewModel.isAddButtonDisabled().get());
     }
 
     @Test
     public void ifEnteredItemsAreNotValidAddButtonIsDisabled() {
         viewModel.getTxtEnteredItemsProp().setValue("50 d 98 3s");
-        assertFalse(viewModel.isAddButtonEnable());
+        assertTrue(viewModel.isAddButtonDisabled().get());
     }
 
     @Test
