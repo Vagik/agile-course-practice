@@ -66,9 +66,11 @@ public class ViewModel {
     public DepositTimeType getPeriod() {
         return period.get();
     }
+
     public ObjectProperty<DepositTimeType> periodProperty() {
         return period;
     }
+
     public void setPeriod(final DepositTimeType period) {
         this.period.set(period);
     }
@@ -76,9 +78,11 @@ public class ViewModel {
     public CapitalizationPeriod getCapitalization() {
         return capitalization.get();
     }
+
     public ObjectProperty<CapitalizationPeriod> capitalizationProperty() {
         return capitalization;
     }
+
     public void setCapitalization(final CapitalizationPeriod capitalization) {
         this.capitalization.set(capitalization);
     }
@@ -86,9 +90,11 @@ public class ViewModel {
     public String getPercentProperty() {
         return percentProperty.get();
     }
+
     public SimpleStringProperty percentProperty() {
         return percentProperty;
     }
+
     public void setPercentProperty(final String percentProperty) {
         this.percentProperty.set(percentProperty);
     }
@@ -96,9 +102,11 @@ public class ViewModel {
     public String getStartSumProperty() {
         return startSumProperty.get();
     }
+
     public SimpleStringProperty startSumProperty() {
         return startSumProperty;
     }
+
     public void setStartSumProperty(final String startSumProperty) {
         this.startSumProperty.set(startSumProperty);
     }
@@ -106,9 +114,11 @@ public class ViewModel {
     public String getResultProperty() {
         return resultProperty.get();
     }
+
     public SimpleStringProperty resultProperty() {
         return resultProperty;
     }
+
     public void setResultProperty(final String resultProperty) {
         this.resultProperty.set(resultProperty);
     }

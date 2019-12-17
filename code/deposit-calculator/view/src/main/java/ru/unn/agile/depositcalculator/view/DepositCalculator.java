@@ -12,14 +12,22 @@ import ru.unn.agile.depositcalculator.viewmodel.ViewModel;
 
 public class DepositCalculator {
 
-    @FXML private ViewModel viewModel;
-    @FXML private TextField txtPercentage;
-    @FXML private TextField txtStartSum;
-    @FXML private ComboBox<DepositTimeType> cmbPeriod;
-    @FXML private ComboBox<CapitalizationPeriod> cmbCapit;
-    @FXML private TextArea txtResult;
-    @FXML private TextArea areaLog;
-    @FXML private Button btnCalc;
+    @FXML
+    private ViewModel viewModel;
+    @FXML
+    private TextField txtPercentage;
+    @FXML
+    private TextField txtStartSum;
+    @FXML
+    private ComboBox<DepositTimeType> cmbPeriod;
+    @FXML
+    private ComboBox<CapitalizationPeriod> cmbCapit;
+    @FXML
+    private TextArea txtResult;
+    @FXML
+    private TextArea areaLog;
+    @FXML
+    private Button btnCalc;
 
     @FXML
     void initialize() {
