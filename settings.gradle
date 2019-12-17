@@ -108,6 +108,8 @@ include "code/deposit-calculator/view"
 project(":code/deposit-calculator/view").name = "deposit-calculator-view"
 include "code/deposit-calculator/viewmodel"
 project(":code/deposit-calculator/viewmodel").name = "deposit-calculator-viewmodel"
+include "code/deposit-calculator/infrastructure"
+project(":code/deposit-calculator/infrastructure").name = "deposit-calculator-infrastructure"
 // Кочетова Дарья
 include "code/matrix/Model"
 project(":code/matrix/Model").name = "matrix-model"

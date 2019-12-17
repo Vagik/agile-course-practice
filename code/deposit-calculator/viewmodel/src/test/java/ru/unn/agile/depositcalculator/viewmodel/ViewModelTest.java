@@ -1,6 +1,5 @@
 package ru.unn.agile.depositcalculator.viewmodel;
 
-
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -10,14 +9,19 @@ import ru.unn.agile.depositcalculator.model.DepositTimeType;
 
 import static ru.unn.agile.depositcalculator.viewmodel.ViewModel.VALIDATION_ERROR;
 
-
 public class ViewModelTest {
 
     private ViewModel viewModel;
 
+    protected void setViewModel(final ViewModel viewModel) {
+        this.viewModel = viewModel;
+    }
+
     @Before
     public void setUp() {
-        viewModel = new ViewModel();
+        if (viewModel == null) {
+            viewModel = new ViewModel(new FakeLogger());
+        }
     }
 
     @After
@@ -91,5 +95,93 @@ public class ViewModelTest {
         viewModel.setStartSumProperty("asdfasdf100-adsf.0");
         viewModel.calculate();
         Assert.assertEquals(VALIDATION_ERROR, viewModel.getResultProperty());
+    }
+
+    @Test
+    public void canSetLoggerToViewModel() {
+        var viewModel = new ViewModel();
+        viewModel.setLogger(new FakeLogger());
+        Assert.assertNotNull(viewModel.getLogs());
+    }
+
+    @Test (expected = IllegalArgumentException.class)
+    public void cannotCreateViewModelIfLoggerIsNull() {
+        new ViewModel(null);
+    }
+
+    @Test (expected = IllegalArgumentException.class)
+    public void cannotSetNullLoggerToViewModel() {
+        viewModel.setLogger(null);
+    }
+
+    @Test
+    public void loggerInitiallyContainsDefaultValues() {
+        var logs = viewModel.getLogs();
+        Assert.assertFalse(logs.isEmpty());
+    }
+
+    @Test
+    public void canLogCapitalizationUpdatedValue() {
+        viewModel.setCapitalization(CapitalizationPeriod.YEAR);
+        var logs = viewModel.getLogs();
+        var lastLog = logs.get(logs.size() - 1);
+        Assert.assertTrue(lastLog.contains(ViewModel.CAPITALIZATION_UPDATED_LOG_MSG));
+    }
+
+    @Test
+    public void canLogPeriodUpdatedValue() {
+        viewModel.setPeriod(DepositTimeType.DAY);
+        var logs = viewModel.getLogs();
+        var lastLog = logs.get(logs.size() - 1);
+        Assert.assertTrue(lastLog.contains(ViewModel.PERIOD_UPDATED_LOG_MSG));
+    }
+
+    @Test
+    public void canLogStartSumValueChanged() {
+        viewModel.setStartSumProperty("10000");
+        viewModel.onSumFocusChanged();
+        var logs = viewModel.getLogs();
+        var lastLog = logs.get(logs.size() - 1);
+        Assert.assertTrue(lastLog.contains(ViewModel.START_SUM_UPDATED_LOG_MSG));
+    }
+
+    @Test
+    public void canLogPercentageValueChanged() {
+        viewModel.setPercentProperty("21");
+        viewModel.onPercentageFocusChanged();
+        var logs = viewModel.getLogs();
+        var lastLog = logs.get(logs.size() - 1);
+        Assert.assertTrue(lastLog.contains(ViewModel.PERCENTAGE_UPDATED_LOG_MSG));
+    }
+
+    @Test
+    public void canLogManyActions() {
+        viewModel.setPercentProperty("21");
+        viewModel.onPercentageFocusChanged();
+
+        viewModel.setCapitalization(CapitalizationPeriod.YEAR);
+
+        var logs = viewModel.getLogs();
+        var logsCount = logs.size();
+        Assert.assertTrue(logsCount > 1);
+    }
+
+    @Test
+    public void canLogCalculationCompletion() {
+        viewModel.setStartSumProperty("10000");
+        viewModel.onSumFocusChanged();
+
+        viewModel.setPercentProperty("21");
+        viewModel.onPercentageFocusChanged();
+
+        viewModel.setPeriod(DepositTimeType.DAY);
+
+        viewModel.setCapitalization(CapitalizationPeriod.YEAR);
+
+        viewModel.calculate();
+
+        var logs = viewModel.getLogs();
+        var lastLog = logs.get(logs.size() - 1);
+        Assert.assertTrue(lastLog.contains(ViewModel.CALCULATION_COMPLETED_LOG_MSG));
     }
 }
